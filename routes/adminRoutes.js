@@ -336,8 +336,10 @@ router.get("/download-certificates", async (req, res) => {
       doc.fontSize(10).text(`Name: ${user.name}`);
       doc.text(`ID No: ${user.registrationNumber || "N/A"}`);
       doc.text(`Date of Birth: ${user.dateOfBirth || "N/A"}`);
-      doc.text(`Completion Date: ${user.completionDate || "N/A"}`);
-      doc.text(`Basis of Admission: ${user.admissionBasis || "N/A"}`);
+      const currentDate = new Date().toLocaleDateString(); // e.g. "4/10/2025" or based on locale
+      doc.text(`Completion Date: ${currentDate}`);
+
+      doc.text(`Basis of Admission: ${user.basisOfAdmission || "N/A"}`);
       doc.moveDown();
 
       doc.fontSize(10).text("ACADEMIC RECORD", { align: "center", underline: true });
